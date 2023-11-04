@@ -1,5 +1,5 @@
 backend/__pycache__
-backend/models
+*.sav
 
 # Nuxt dev/build outputs
 .output
