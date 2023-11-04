@@ -12,7 +12,8 @@ packages = [
     "scikit-learn",
     "openai",
     "uuid",
-    "python-dotenv"
+    "python-dotenv",
+    "python-multipart"
 ]
 
 install(packages)
