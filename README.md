@@ -14,8 +14,16 @@ This project was created for Durhack '23, a 24 hour hackathon held annually by D
 - Process: ![Result](https://i.imgur.com/beHRvxK.jpeg)
 - Result: the best trained model (LinearSVC) is pickled and then returned to the user as model.sav 
 
-#### Technology
+### Technology
 The technology used for this project is surprisingly simple (apart from model debugging)
-- ChatGPT 3.5 (Natural language pprocessing
-- Pandas (loading of dataset files into ddataframe
+
+#### Model Generation
+- ChatGPT 3.5 (Natural language pprocessing)
+- Pandas (loading of dataset files into ddataframe)
 - sklearn (model selection and training of models)
+
+#### API
+- FastAPI (API framework)
+
+#### Web Interface
+- Nuxt3

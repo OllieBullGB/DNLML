@@ -1,3 +1,12 @@
+import os
+import pandas as pd
+import numpy as np
+import openai 
+import pickle
+import uuid
+import ast
+from dotenv import load_dotenv
+
 from sklearn.preprocessing import PowerTransformer, LabelEncoder
 from sklearn.model_selection import train_test_split as tt_split
 from sklearn.metrics import accuracy_score, mean_squared_error as mse
@@ -6,9 +15,9 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.ensemble import RandomForestClassifier, RandomForestRegressor
 from sklearn.linear_model import SGDClassifier, Ridge
 from sklearn.kernel_approximation import RBFSampler
-import pickle
-import uuid
 
+load_dotenv()
+openai.api_key = os.getenv("OPENAI_API_KEY")
 
 class DAML:
   def __init__(self, df, task, verbose = 0, forceTask=None):
@@ -35,15 +44,22 @@ class DAML:
     X_temp, self.X_test, y_temp, self.y_test = tt_split(X, y,test_size=0.2, random_state=42)
     self.X_train, self.X_val, self.y_train, self.y_val = tt_split(X_temp, y_temp, test_size = 0.25, random_state=42)
 
+    self.selected_model = None
     self.model()
 
     # sort the models by accuracy desc
     reverse_order = self.task != 'regression'
     self.models.sort(key=lambda x: x[1], reverse=reverse_order)
 
+    # pick the type of the best model to be selected_model
+    self.selected_model = self.models[0][0].__class__.__name__
+    self.selected_model_url = None
+
     # dump best model
     if len(self.models) > 0:
-      pickle.dump(self.models[0][0], open(f'./models/{str(uuid.uuid4())}model.sav', 'wb'))
+      model_name = str(uuid.uuid4()) + "model.sav"
+      pickle.dump(self.models[0][0], open(f'./models/{model_name}', 'wb'))
+      self.selected_model_url = "http://localhost:8000/models/" + model_name
 
   def process_NLP_task(self, task, processor="open-ai"):
     column_string = ', '.join(list(self.df.columns))
@@ -69,8 +85,8 @@ class DAML:
     # deal with missing values
     self.df.dropna(axis=0, inplace=True)
     # encode categorical data
-    cols = df.columns
-    numerical_cols = df._get_numeric_data().columns
+    cols = self.df.columns
+    numerical_cols = self.df._get_numeric_data().columns
     categorical_cols = list(set(cols) - set(numerical_cols))
     for col_name in categorical_cols:
       le = LabelEncoder()
