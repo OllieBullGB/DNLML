@@ -29,20 +29,21 @@ async function handleQuery()
     uChat.appendChild(uBubble);
     chatWindow.appendChild(uChat);
 
-    const res = await fetch(`127.0.0.1:8000/link?task="${task}"&dataset="${dataset}"`);
-    console.log(res);
-
-    // using the data, create a new text bubble from the left side
-    // data contains "type", "accuracy", "url"
     const sChat = document.createElement("div");
     sChat.classList.add("chat");
     sChat.classList.add("chat-start");
     const sBubble = document.createElement("div");
     sBubble.classList.add("chat-bubble");
-    sBubble.innerHTML = `Model Type: ${res.type}<br>Accuracy: ${res.accuracy}<br>URL: ${res.url}`;
+    sBubble.innerHTML= "Loading...";
     sChat.appendChild(sBubble);
     chatWindow.appendChild(sChat);
-}
 
+    const res = await fetch(`127.0.0.1:8000/link?task="${task}"&dataset="${dataset}"`);
+    console.log(res);
+
+    // using the data, create a new text bubble from the left side
+    // data contains "type", "accuracy", "url"
+    sBubble.innerHTML = `Model Type: ${res.type}<br>Accuracy: ${res.accuracy}<br>URL: ${res.url}`;
+}
 
 </script>
