@@ -18,14 +18,28 @@ If you wish to understand how the interesting part of this project works, please
 
 ### Technology
 The technology used for this project is surprisingly simple (apart from model debugging)
+- Model Generation
+    - ChatGPT 3.5 (Natural language pprocessing)
+    - Pandas (loading of dataset files into ddataframe)
+    - sklearn (model selection and training of models)
+- API
+    - FastAPI (API framework)
+- Web Interface
+    - Nuxt3
 
-#### Model Generation
-- ChatGPT 3.5 (Natural language pprocessing)
-- Pandas (loading of dataset files into ddataframe)
-- sklearn (model selection and training of models)
+### Using the API
+Because I have some credits left over from OpenAI, please feel free to use the API :)
 
-#### API
-- FastAPI (API framework)
+url: https://python-nlai-service.onrender.com/
+- / : says Hello
+- /link : processes an NLAI request with a dataset url
+    - dataset_url: query
+    - task: query
+- /file : processes an NLAI request with a base64 encoded csv
+    - dataset: body (ensure that the start 'data:text/csv;base64,' is removed from the front)
+    - task: body
 
-#### Web Interface
-- Nuxt3
+Both the processing routes will return the following
+- type: the model that was selected as the best after tuning
+- accuracy: the test accuracy of the chosen model
+- url: a link to download the model as a pickle
