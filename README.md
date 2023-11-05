@@ -28,7 +28,7 @@ The technology used for this project is surprisingly simple (apart from model de
     - Nuxt3
 
 ### Using the API
-Because I have some credits left over from OpenAI, please feel free to use the API :)
+Because I have some credits left over from OpenAI, please feel free to use the DNLML API :)
 
 url: https://python-nlai-service.onrender.com/
 - / : says Hello
