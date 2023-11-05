@@ -19,6 +19,8 @@ from sklearn.kernel_approximation import RBFSampler
 load_dotenv()
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
+
+
 class DAML:
   def __init__(self, df, task, verbose = 0, forceTask=None):
     self.df = df
@@ -57,9 +59,10 @@ class DAML:
 
     # dump best model
     if len(self.models) > 0:
+      domain_name = "https://python-nlai-service.onrender.com/"
       model_name = str(uuid.uuid4()) + "model.sav"
       pickle.dump(self.models[0][0], open(f'./models/{model_name}', 'wb'))
-      self.selected_model_url = "http://localhost:8000/models/" + model_name
+      self.selected_model_url = domain_name + "/models/" + model_name
 
   def process_NLP_task(self, task, processor="open-ai"):
     column_string = ', '.join(list(self.df.columns))
