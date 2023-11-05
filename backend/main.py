@@ -1,5 +1,6 @@
 from fastapi import FastAPI, UploadFile, File
 from fastapi.staticfiles import StaticFiles
+from fastapi.middleware.cors import CORSMiddleware
 from io import BytesIO
 from pydantic import BaseModel
 import pandas as pd
@@ -8,6 +9,9 @@ from DAML import DAML
 app = FastAPI()
 # allow the /models folder to be served as a static directory
 app.mount("/models", StaticFiles(directory="models"), name="models")
+
+# allow CORS
+app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"], allow_headers=["*"])
 
 @app.get("/")
 def read_root():
