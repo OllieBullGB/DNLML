@@ -44,7 +44,7 @@ def processLink(
         print(e)
         return {"error": "Invalid dataset URL"}
 
-@app.get("/file")
+@app.post("/file")
 def processFile(
     query: FileQuery):
 
