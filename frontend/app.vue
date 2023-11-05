@@ -2,7 +2,7 @@
   <div class="h-screen w-screen max-h-max bg-gray-200 overflow-hidden flex flex-col">
     <Disclaimer class="w-10/12 lg:w-1/2 mt-4 mx-auto"/>
     <ChatWindow class="w-10/12 h-96 flex-grow lg:w-1/2 mt-4 mx-auto rounded-2xl"/>
-    <footer class=" bg-purple-300 w-full mx-auto flex h-32 justify-between p-4">
+    <footer class="sticky bottom-0 bg-purple-300 w-full mx-auto flex h-32 justify-between p-4">
       <div class="flex flex-row justify-center w-full md:w-1/2 mx-auto">
         <input type="text" id="task" placeholder="Type your query here" class="input input-bordered w-full max-w-xs mx-auto" />
         <input type="file" id="dataset" class="file-input w-full max-w-xs" />
