@@ -4,8 +4,13 @@
     <ChatWindow class="w-10/12 h-96 flex-grow lg:w-1/2 mt-4 mx-auto rounded-2xl"/>
     <footer class="sticky bottom-0 bg-purple-300 w-full mx-auto flex h-32 justify-between p-4">
       <div class="flex flex-row justify-center w-full md:w-1/2 mx-auto">
-        <input type="text" id="task" placeholder="Type your query here" class="input input-bordered w-full max-w-xs mx-auto" />
-        <input type="file" id="dataset" class="file-input w-full max-w-xs" />
+        <div class="tooltip" data-tip="Type a natural language query">
+          <input type="text" id="task" placeholder="Type your query here" class="input input-bordered w-full max-w-xs mx-auto" />
+        </div>
+
+        <div class="tooltip" data-tip="Upload your csv dataset">
+          <input type="file" id="dataset" class="file-input w-full max-w-xs" />
+        </div>
         <button @click="handleQuery" class="btn btn-success">Send</button>
       </div>
     </footer>
