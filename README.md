@@ -8,6 +8,8 @@ algorithms by providing an automated natural language environment for building m
 
 This project was created for Durhack '23, a 24 hour hackathon held annually by Durham University CompSoc in association with HackathonsUK and MLH.
 
+If you wish to understand how the interesting part of this project works, please consult the DAML notebook
+
 #### Example
 - Dataset URL: https://www.kaggle.com/datasets/andrewmvd/heart-failure-clinical-data
 - Query: "I want to predict whether a patient died or not"
