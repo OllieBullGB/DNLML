@@ -1,5 +1,6 @@
 backend/__pycache__
 *.sav
+*.csv
 
 # Nuxt dev/build outputs
 .output

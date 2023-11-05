@@ -62,7 +62,7 @@ class DAML:
       domain_name = "https://python-nlai-service.onrender.com/"
       model_name = str(uuid.uuid4()) + "model.sav"
       pickle.dump(self.models[0][0], open(f'./models/{model_name}', 'wb'))
-      self.selected_model_url = domain_name + "/models/" + model_name
+      self.selected_model_url = domain_name + "models/" + model_name
 
   def process_NLP_task(self, task, processor="open-ai"):
     column_string = ', '.join(list(self.df.columns))

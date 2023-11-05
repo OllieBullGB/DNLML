@@ -4,7 +4,13 @@ from fastapi.middleware.cors import CORSMiddleware
 from io import BytesIO
 from pydantic import BaseModel
 import pandas as pd
+from binascii import a2b_base64
+import uuid
 from DAML import DAML
+
+class FileQuery(BaseModel):
+    task: str
+    dataset_file: str
 
 app = FastAPI()
 # allow the /models folder to be served as a static directory
@@ -40,24 +46,27 @@ def processLink(
 
 @app.get("/file")
 def processFile(
-    task,
-    dataset_file: UploadFile = File(...)):
+    query: FileQuery):
 
     try:
-        print("TASK:", task)
-        print("DATASET FILE:", dataset_file)
+        print("TASK:", query.task)
+        print("DATASET FILE:", query.dataset_file)
     except Exception as e:
         print(e)
         return {"error": "Invalid task or dataset file"}
 
     try:
-        contents = dataset_file.file.read()
-        buffer = BytesIO(contents)
-        df = pd.read_csv(dataset_file)
-        buffer.close()
-        dataset_file.file.close()
+        padding_len = len(query.dataset_file) % 4
+        query.dataset_file += "=" * (4 - padding_len) if padding_len != 0 else ""
+        binary_data = a2b_base64(query.dataset_file)
+
+        temp_file_name = "./temp/" + str(uuid.uuid4()) + '.csv'
+        fd = open(temp_file_name, 'wb')
+        fd.write(binary_data)
+        fd.close()
+        df = pd.read_csv(temp_file_name)
         print("GOT DATASET")
-        daml = DAML(df, task)
+        daml = DAML(df, query.task)
         return {"type": daml.selected_model, "accuracy": daml.models[0][1], "url": daml.selected_model_url}
     except Exception as e:
         print(e)
