@@ -30,7 +30,7 @@ The technology used for this project is surprisingly simple (apart from model de
 ### Using the API
 Because I have some credits left over from OpenAI, please feel free to use the DNLML API :)
 
-url: https://python-nlai-service.onrender.com/
+url: <to be added after event>
 - / : says Hello
 - /link : processes an NLAI request with a dataset url
     - dataset_url: query
