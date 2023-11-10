@@ -1,6 +1,8 @@
 # DNLML
 ![DNLML Logo](https://i.imgur.com/Po2ARAa.png)
 
+[Try out the demo here!](https://dancing-arithmetic-2b2449.netlify.app/) 
+
 ### Durhack Natural-Language Machine-Learning
 This project provides a framework for people with
 low technical skills to utilise machine learning
